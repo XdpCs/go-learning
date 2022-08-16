@@ -12,7 +12,7 @@ func main() {
 		fmt.Fprintf(w, "URL.Path = %q\n", req.URL.Path)
 
 	})
-	engine.GET("hello", func(writer http.ResponseWriter, request *http.Request) {
+	engine.GET("/hello", func(writer http.ResponseWriter, request *http.Request) {
 		for k, v := range request.Header {
 			fmt.Fprintf(writer, "Header[%q] = %q\n", k, v)
 		}
