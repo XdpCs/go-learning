@@ -16,5 +16,8 @@ func main() {
 	engine.GET("/hello/:name", func(context *gee.Context) {
 		context.String(http.StatusOK, "hello %s,you're at %s\n", context.Param("name"), context.Path)
 	})
+	engine.GET("/assets/*filepath", func(context *gee.Context) {
+		context.JSON(http.StatusOK, gee.H{"filepath": context.Param("filepath")})
+	})
 	engine.Run(":9999")
 }
