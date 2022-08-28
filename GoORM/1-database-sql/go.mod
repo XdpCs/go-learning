@@ -1,4 +1,4 @@
-module geeorm
+module goorm
 
 go 1.18
 
