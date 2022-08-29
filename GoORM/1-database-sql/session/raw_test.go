@@ -2,6 +2,7 @@ package session
 
 import (
 	"database/sql"
+	_ "github.com/mattn/go-sqlite3"
 	"os"
 	"testing"
 )
@@ -23,8 +24,19 @@ func TestSession_Exec(t *testing.T) {
 	s := NewSession()
 	_, _ = s.Raw("drop table if exists user;").Exec()
 	_, _ = s.Raw("create table user(Name text);").Exec()
-	result, _ := s.Raw("insert into user('Name') values (?),(?)", "fyy", "xdp").Exec()
+	result, _ := s.Raw("insert into user(`Name`) values (?),(?)", "fyy", "xdp").Exec()
 	if count, err := result.RowsAffected(); err != nil || count != 2 {
 		t.Fatal("expect 2,but got", count)
+	}
+}
+
+func TestSession_QueryRows(t *testing.T) {
+	s := NewSession()
+	_, _ = s.Raw("drop table if exists user;").Exec()
+	_, _ = s.Raw("create table user(Name text);").Exec()
+	row := s.Raw("select count(*) from user").QueryRow()
+	var count int
+	if err := row.Scan(&count); err != nil || count != 0 {
+		t.Fatal("failed to query db", err)
 	}
 }
