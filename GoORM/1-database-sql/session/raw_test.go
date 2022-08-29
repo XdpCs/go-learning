@@ -9,6 +9,7 @@ import (
 
 var TestDB *sql.DB
 
+// go test 运行
 func TestMain(m *testing.M) {
 	TestDB, _ = sql.Open("sqlite3", "../fyy.db")
 	code := m.Run()
