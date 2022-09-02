@@ -1,6 +1,7 @@
 package session
 
 import (
+	"fmt"
 	"goorm/clause"
 	"reflect"
 )
@@ -26,4 +27,24 @@ func (s *Session) Find(values interface{}) error {
 	destSlice := reflect.Indirect(reflect.ValueOf(values))
 	destType := destSlice.Type().Elem()
 	table := s.Model(reflect.New(destType).Elem().Interface()).RefTable()
+
+	s.clause.Set(clause.SELECT, table.Name, table.FieldNames)
+	sql, vars := s.clause.Build(clause.SELECT, clause.WHERE, clause.ORDERBY, clause.LIMIT)
+	rows, err := s.Raw(sql, vars...).QueryRows()
+	if err != nil {
+		return err
+	}
+	for rows.Next() {
+		dest := reflect.New(destType).Elem()
+		var values []interface{}
+		for _, name := range table.FieldNames {
+			values = append(values, dest.FieldByName(name).Addr().Interface())
+		}
+		if err := rows.Scan(values...); err != nil {
+			return err
+		}
+		fmt.Println(dest)
+		destSlice.Set(reflect.Append(destSlice, dest))
+	}
+	return rows.Close()
 }
