@@ -2,8 +2,8 @@
 
 ## Go基础知识
 
+* [Go命令](./Note/GoCommand.md)
 * [Go Module](./Note/GoModule.md)
-* [GoPath](./Note/GoPath.md)
 
 ## Go进阶知识
 
