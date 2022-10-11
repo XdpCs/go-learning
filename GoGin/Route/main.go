@@ -11,6 +11,6 @@ func main() {
 	routers.LoadBlog(r)
 	routers.LoadShop(r)
 	if err := r.Run(); err != nil {
-		fmt.Println("startup service failed,err:%v\n", err)
+		fmt.Printf("startup service failed,err:%v\n", err)
 	}
 }
