@@ -12,6 +12,6 @@ func main() {
 	routers.Include(shop.Routers, blog.Routers)
 	r := routers.Init()
 	if err := r.Run(); err != nil {
-		fmt.Println("startup service failed,err:%v\n", err)
+		fmt.Printf("startup service failed,err:%v\n\n", err)
 	}
 }

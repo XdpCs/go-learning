@@ -11,7 +11,7 @@ func main() {
 	r := gin.Default()
 	r.GET("/toMyGithub", myGithubHandler)
 	if err := r.Run(); err != nil {
-		fmt.Println("startup service failed,err:%v", err)
+		fmt.Printf("startup service failed,err:%v\n", err)
 	}
 }
 
