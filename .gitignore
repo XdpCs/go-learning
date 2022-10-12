@@ -2,3 +2,4 @@
 out
 *.iml
 GoMysql/conf
+.DS_Store
