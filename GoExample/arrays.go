@@ -23,6 +23,10 @@ func main() {
 	b := [5]int{1, 2, 3, 4, 5}
 	fmt.Println("dcl:", b)
 
+	// 通过编译器 计数数组长度
+	c := [...]int{1, 2, 3, 4, 5}
+	fmt.Println(len(c))
+
 	// 数组的存储类型是单一的
 	// 你可以组合这些数据来构造多维的数据结构
 	var twoD [2][3]int
