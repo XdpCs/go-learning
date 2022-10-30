@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// switch ，方便的条件分支语句
+// switch 是多分支情况时快捷的条件语句
 func main() {
 
 	// 一个基本的 switch
@@ -20,8 +20,8 @@ func main() {
 		fmt.Println("three")
 	}
 
-	// 在一个 case 语句中，你可以使用逗号来分隔多个表达式
-	// 在这个例子中，我们很好的使用了可选的default 分支。
+	// 在同一个 case 语句中，你可以使用逗号来分隔多个表达式
+	// 在这个例子中，还使用了可选的default 分支。
 	switch time.Now().Weekday() {
 	case time.Saturday, time.Sunday:
 		fmt.Println("it's the weekend")
@@ -30,7 +30,7 @@ func main() {
 	}
 
 	// 不带表达式的 switch 是实现 if/else 逻辑的另一种方式
-	// 这里展示了 case 表达式是如何使用非常量的。
+	// 这里展示了 case 表达式是如何使用非常量的
 	t := time.Now()
 	switch {
 	case t.Hour() < 12:
@@ -38,4 +38,8 @@ func main() {
 	default:
 		fmt.Println("it's after noon")
 	}
+
+	// 类型开关 (type switch) 比较类型而非值
+	// 可以用来发现一个接口值的类型
+	// 在这个例子中，变量 t 在每个分支中会有相应的类型
 }

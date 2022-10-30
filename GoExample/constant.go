@@ -17,6 +17,7 @@ func main() {
 	fmt.Println(s1)
 
 	const n = 500000
+
 	// 常数表达式可以执行任意精度的运算
 	const d = 3e20 / n
 	fmt.Println(d)

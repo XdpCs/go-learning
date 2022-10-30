@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // for 是 Go 中唯一的循环结构
-// 这里有 for 循环的三个基本使用方式。
+// 这里有 for 循环的三个基本使用方式
 func main() {
 	i := 1
 	// 带单个循环条件
@@ -22,5 +22,13 @@ func main() {
 	for {
 		fmt.Println("loop")
 		break
+	}
+
+	// 使用 continue 直接进入下一次循环
+	for n := 0; n <= 5; n++ {
+		if n%2 == 0 {
+			continue
+		}
+		fmt.Println(n)
 	}
 }
