@@ -5,8 +5,8 @@ import (
 	"fmt"
 )
 
-// Go 语言使用一个独立的·明确的返回值来传递错误信息的
-// Go 语言的处理方式能清楚的知道哪个函数返回了错误，并能像调用那些没有出错的函数一样调用
+// Go 语言使用一个独立的、明确的返回值来传递错误信息的
+// Go 语言的处理方式能清楚的知道哪个函数返回了错误，并使用跟其他（无异常处理的）语言类似的方式来处理错误
 
 // 错误通常是最后一个返回值并且是 error 类型，一个内建的接口
 func f1(arg int) (int, error) {
@@ -32,13 +32,15 @@ func (e *argError) Error() string {
 
 func f2(arg int) (int, error) {
 	if arg == 42 {
-		// 使用 &argError 语法来建立一个新的结构体，并提供了 arg 和 prob 这个两个字段的值
+		// 使用 &argError 语法来建立一个新的结构体，并提供了 arg 和 prob 这两个字段的值
 		return -1, &argError{arg, "can't work with it"}
 	}
 	return arg + 3, nil
 }
 
 func main() {
+	// 下面的两个循环测试了每一个会返回错误的函数
+	// 注意，在 if 的同一行进行错误检查，是 Go 代码中的一种常见用法
 	for _, i := range []int{7, 42} {
 		if r, err := f1(i); err != nil {
 			fmt.Println("f1 failed:", err)
@@ -54,7 +56,7 @@ func main() {
 		}
 	}
 
-	// 如果想在程序中使用一个自定义错误类型中的数据
+	// 如果想在程序中使用一个自定义错误类型的数据
 	// 需要通过类型断言来得到这个错误类型的实例
 	_, err := f2(42)
 	if a, ok := err.(*argError); ok {
